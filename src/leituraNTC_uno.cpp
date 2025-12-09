@@ -7,20 +7,16 @@
 
 double getTempTermistorNTCBeta(const uint16_t analogValue, const uint16_t serialResistance, const uint16_t bCoefficient, const uint16_t nominalResistance)
 {
-  float resistance, temp;
-
-  // convert the value to resistance
-  resistance = (serialResistance / ((float)analogValue)) * ADC_RESOLUTION - serialResistance;
+  float resistance = 0.0, temp = 0.0;
+  resistance = (serialResistance / ((float)analogValue)) * ADC_RESOLUTION - serialResistance;   // convert the value to resistance
   temp = 1.0 / ((1.0 / (TEMPERATURENOMINAL + 273.15)) + (1.0 / bCoefficient) * log(resistance / nominalResistance)); // 1.0/( (1/To)+(1/B)*ln(R/Ro) )
   return (temp - 273.15);
 }
 
 double getTempTermistorNTCSteinhart(const uint16_t analogValue, const uint16_t serialResistance, const float a, const float b, const float c)
 {
-  float resistance, temp;
-
-  // convert the value to resistance
-  resistance = (serialResistance / ((float)analogValue)) * ADC_RESOLUTION - serialResistance;
+  float resistance = 0.0, temp = 0.0;
+  resistance = (serialResistance / ((float)analogValue)) * ADC_RESOLUTION - serialResistance;  // convert the value to resistance
   resistance = log(resistance);
   temp = 1.0 / (a + b * resistance + c * resistance * resistance * resistance);
   return (temp - 273.15);
