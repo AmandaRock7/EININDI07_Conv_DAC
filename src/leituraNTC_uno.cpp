@@ -35,8 +35,8 @@ void loop()
     uint16_t V_BITS = analogRead(NTC_PIN);
     const float R_NTC = R_SERIE * ((ADC_RESOLUTION / (float)V_BITS) - 1);   // convert the value to resistance
     float temperature1 = getTempTermistorNTCBeta(R_NTC,                    // Analog Value
-                                                 10000,      // Nominal resistance at 25 ºC
-                                                 3455); // thermistor's beta coefficient
+                                                 3455,        // thermistor's beta coefficient
+                                                 10000); // Nominal resistance at 25 ºC
     float temperature2 = getTempTermistorNTCSteinhart(log(R_NTC),      // Ln da Resistance do NTC
                                                       0.001129241,         // a
                                                       0.0002341077,     // b
